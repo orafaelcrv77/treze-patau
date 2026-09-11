@@ -703,12 +703,19 @@ const ARCADE={k:"bowl",nm:"Boliche 13",unlock:35,entry:8,
    imagem (quadrada, de preferência 400×400). Enquanto `img` for null,
    o jogo desenha um retrato provisório em SVG.
    Para adicionar mais pessoas, basta acrescentar objetos nesta lista. */
+/* Caminho base: a página pode ser servida como /treze (sem barra),
+   /treze/ ou /treze/index.html — isto resolve os três casos. */
+const BASE=(function(){
+  let p=location.pathname;
+  if(/\.html?$/i.test(p)) return p.replace(/[^\/]*$/,"");
+  return p.charAt(p.length-1)==="/" ? p : p+"/";
+})();
 const DEVS=[
- {nome:"Caio",    img:"fotos/Caio.jpg",    pos:"center 24%"},
- {nome:"Hagatha", img:"fotos/Hagatha.jpg", pos:"center 24%"},
- {nome:"Hagnes",  img:"fotos/Hagnes.jpg",  pos:"62% 44%"},
- {nome:"Mariana", img:"fotos/Mariana.jpg", pos:"66% 42%"},
- {nome:"Mayk",    img:"fotos/Mayk.jpg",    pos:"center 16%"}
+ {nome:"Caio",    img:BASE+"fotos/Caio.jpg",    pos:"center 24%"},
+ {nome:"Hagatha", img:BASE+"fotos/Hagatha.jpg", pos:"center 24%"},
+ {nome:"Hagnes",  img:BASE+"fotos/Hagnes.jpg",  pos:"62% 44%"},
+ {nome:"Mariana", img:BASE+"fotos/Mariana.jpg", pos:"66% 42%"},
+ {nome:"Mayk",    img:BASE+"fotos/Mayk.jpg",    pos:"center 16%"}
 ];
 
 /* ===========================================================
