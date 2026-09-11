@@ -172,11 +172,11 @@ p{margin:0}
 .btn:disabled::after{display:none}
 
 /* ---------- créditos / bolinhas ---------- */
-.devs{display:flex;gap:14px;flex-wrap:wrap;margin-top:6px}
-.dev{display:flex;flex-direction:column;align-items:center;gap:8px;width:86px;
+.devs{display:flex;gap:7px;flex-wrap:wrap;margin-top:6px;justify-content:flex-start}
+.dev{display:flex;flex-direction:column;align-items:center;gap:7px;width:58px;
   animation:devin .7s var(--pop) both}
 @keyframes devin{0%{opacity:0;transform:translateY(14px) scale(.75)}100%{opacity:1;transform:none}}
-.dev .ring{width:72px;height:72px;border-radius:999px;padding:2px;position:relative;
+.dev .ring{width:56px;height:56px;border-radius:999px;padding:2px;position:relative;
   background:conic-gradient(from 210deg,var(--acc),var(--acc-2),var(--gold),var(--acc));
   transition:transform .3s var(--pop)}
 .dev:hover .ring{transform:translateY(-5px) scale(1.06)}
@@ -185,7 +185,7 @@ p{margin:0}
 .dev:hover .ring::after{opacity:1}
 .dev .ring img,.dev .ring svg{width:100%;height:100%;border-radius:999px;display:block;
   background:var(--surf-2);object-fit:cover}
-.dev .nm{font-size:12.5px;font-weight:600;text-align:center;line-height:1.2}
+.dev .nm{font-size:11.5px;font-weight:600;text-align:center;line-height:1.15;letter-spacing:-.01em}
 .dev .rl{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;
   color:var(--bone-3);text-align:center;line-height:1.3}
 .credline{font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
@@ -704,10 +704,11 @@ const ARCADE={k:"bowl",nm:"Boliche 13",unlock:35,entry:8,
    o jogo desenha um retrato provisório em SVG.
    Para adicionar mais pessoas, basta acrescentar objetos nesta lista. */
 const DEVS=[
- {nome:"Idealizadora 1", papel:"criação e conteúdo", img:null,
-  face:{skin:"#c98d62",skin2:"#ac7048",hair:"#2b1b18",style:"longo",shirt:"#3fd3e0"}},
- {nome:"Idealizadora 2", papel:"criação e pesquisa", img:null,
-  face:{skin:"#7a4f34",skin2:"#613c26",hair:"#171012",style:"crespo",shirt:"#ffb03b"}}
+ {nome:"Caio",    img:"fotos/Caio.jpg",    pos:"center 24%"},
+ {nome:"Hagatha", img:"fotos/Hagatha.jpg", pos:"center 24%"},
+ {nome:"Hagnes",  img:"fotos/Hagnes.jpg",  pos:"62% 44%"},
+ {nome:"Mariana", img:"fotos/Mariana.jpg", pos:"66% 42%"},
+ {nome:"Mayk",    img:"fotos/Mayk.jpg",    pos:"center 16%"}
 ];
 
 /* ===========================================================
@@ -1044,9 +1045,11 @@ document.addEventListener("pointerdown",()=>auResume(),{once:true});
    ABERTURA
    =========================================================== */
 function intro(){
-  const devs=DEVS.map((d,i)=>'<div class="dev" style="animation-delay:'+(.5+i*.13)+'s">'
-    +'<div class="ring">'+(d.img?'<img src="'+d.img+'" alt="'+esc(d.nome)+'">':faceSVG(d.face,i))+'</div>'
-    +'<span class="nm">'+esc(d.nome)+'</span><span class="rl">'+esc(d.papel)+'</span></div>').join("");
+  const devs=DEVS.map((d,i)=>'<div class="dev" style="animation-delay:'+(.42+i*.09)+'s">'
+    +'<div class="ring">'+(d.img
+        ?'<img src="'+d.img+'" alt="'+esc(d.nome)+'" loading="lazy" style="object-position:'+(d.pos||"center")+'">'
+        :faceSVG(d.face,i))+'</div>'
+    +'<span class="nm">'+esc(d.nome)+'</span></div>').join("");
   show('<div class="stg">'
    +'<p class="kicker" style="animation-delay:.02s">Quiz · 13 por partida</p>'
    +'<h1 class="hero" style="animation-delay:.06s">Tre<i>ze</i></h1>'
