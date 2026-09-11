@@ -218,7 +218,7 @@ p{margin:0}
   background:linear-gradient(90deg,var(--gold-2),var(--gold));transition:width 1s var(--ease);
   box-shadow:0 0 10px var(--acc-glow)}
 .rank .nx{font-family:var(--mono);font-size:10px;color:var(--bone-3);margin-top:7px}
-.rank .gr{flex:1;min-width:0}
+.rank .gr{flex:1;min-width:0;display:block}
 .acts{display:flex;flex-direction:column;gap:10px}
 .acts .act{animation:sin .5s var(--ease) both}
 .acts .act:nth-child(1){animation-delay:.06s}.acts .act:nth-child(2){animation-delay:.12s}
@@ -239,9 +239,9 @@ p{margin:0}
   display:grid;place-items:center;color:var(--gm,var(--bone-2));font-family:var(--disp);font-size:19px;
   background:var(--void)}
 .act.afford .ic{border-color:var(--gold);color:var(--gold)}
-.act .gr{flex:1;min-width:0}
-.act .nm{font-weight:700;font-size:16.5px}
-.act .ds{color:var(--bone-3);font-size:13px;margin-top:3px;line-height:1.4}
+.act .gr{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.act .nm{font-weight:700;font-size:16.5px;display:block;line-height:1.25}
+.act .ds{color:var(--bone-3);font-size:13px;line-height:1.4;display:block}
 .act .rt{font-family:var(--mono);font-size:10.5px;color:var(--bone-3);flex:none;text-align:right}
 .act .rt b{color:var(--gold);display:block;font-size:12.5px}
 .act .rt .best{color:var(--bone-2);font-variant-numeric:tabular-nums}
@@ -1027,6 +1027,7 @@ function go(v){
   V=v; rail.hidden=true;
   document.body.dataset.g = v;
   topb.hidden=(v==="intro");
+  const bb=$("#backb"); if(bb) bb.hidden=(v==="hub");
   musPlay(v==="intro"?"hub":v);
   purse();
   if(v==="hub")hub(); else if(v==="album")album(); else if(v==="intro")intro();
