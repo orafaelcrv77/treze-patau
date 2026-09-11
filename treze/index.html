@@ -147,8 +147,8 @@ p{margin:0}
 .kicker{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
   color:var(--acc);display:flex;align-items:center;gap:11px;margin-bottom:22px}
 .kicker::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line-2),transparent)}
-.hero{font-family:var(--disp);font-size:clamp(78px,25vw,152px);line-height:.76;letter-spacing:-.045em;margin:0}
-.hero i{font-style:italic;background:linear-gradient(100deg,var(--acc),var(--acc-2));
+.hero{font-family:var(--disp);font-size:clamp(72px,22vw,140px);line-height:.82;letter-spacing:-.028em;margin:0}
+.hero i{font-style:normal;background:linear-gradient(100deg,var(--acc),var(--acc-2));
   -webkit-background-clip:text;background-clip:text;color:transparent}
 .lede{font-family:var(--disp);font-size:clamp(23px,6.2vw,31px);line-height:1.2;font-style:italic;
   color:var(--bone-2);margin-top:18px;max-width:21ch}
@@ -495,6 +495,76 @@ p{margin:0}
 @keyframes conn{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 /* voo do par até o mural */
 .flyer{position:fixed;z-index:57;pointer-events:none}
+
+/* ================= DESKTOP ================= */
+@media (min-width:900px){
+  .shell{max-width:1080px;padding:0 32px 80px}
+  .view{max-width:700px;margin:0 auto;width:100%}
+  .view.wide{max-width:1080px}
+  .top{padding:18px 0 14px}
+  .rail{top:62px;gap:8px}
+  .chr{max-width:22px;height:50px}
+  .slot .num{font-size:10px}
+
+  /* abertura em duas colunas */
+  .introgrid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  .introgrid .col-b{border-left:1px solid var(--line);padding-left:40px}
+  .hero{font-size:clamp(96px,9vw,150px)}
+  .lede{font-size:34px;max-width:18ch}
+  .body-t{font-size:17px;max-width:42ch}
+  .devs{gap:12px}
+  .dev{width:74px}
+  .dev .ring{width:72px;height:72px}
+  .dev .nm{font-size:13px}
+  .cta{flex-direction:row;flex-wrap:wrap}
+  .cta .btn{flex:1;min-width:210px}
+
+  /* bancada em duas colunas */
+  .wide .acts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .wide .acts .act{animation-delay:0s}
+  .rank{padding:24px 26px}
+  .rank .medal{width:66px;height:66px;font-size:31px}
+  .rank .n{font-size:33px}
+  .album{grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:11px}
+  .cd{min-height:140px}
+  .cd .chr{height:54px;max-width:18px}
+  .cd .ct{font-size:12.5px}
+
+  /* perguntas com mais ar */
+  .q{font-size:46px}
+  .opt{padding:18px 20px;font-size:17px;min-height:64px}
+  .bet .row{gap:12px}
+  .bcard{padding:16px 18px}
+
+  /* instruções lado a lado */
+  .howwrap{max-width:760px}
+  .demo svg{max-height:200px;margin:0 auto}
+  .hsteps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .hsteps li{grid-template-columns:1fr;gap:8px}
+  .hsteps li::before{margin-bottom:2px}
+
+  /* boliche maior */
+  .lanewrap{margin-top:18px}
+  .lanemsg{font-size:13px}
+
+  /* mito ou fato */
+  .mstage{min-height:230px;padding:40px 30px}
+  .mb{padding:22px;font-size:21px}
+
+  /* cariotipagem */
+  .tray{gap:10px;padding:22px 16px;min-height:150px}
+  .pc .chr{max-width:24px}
+  .mural{min-height:80px;padding:14px}
+
+  /* resultados */
+  .score .n{font-size:54px}
+  .karyo{padding:36px 20px;gap:10px}
+  .kc .chr{width:23px;height:68px}
+}
+@media (min-width:1180px){
+  .shell{max-width:1140px}
+  .view.wide{max-width:1140px}
+}
 
 @media (prefers-reduced-motion:reduce){
   *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
@@ -1023,7 +1093,8 @@ let V="intro", wiring=null;
 function show(html,wire){
   const old=main.firstElementChild;
   const put=()=>{
-    main.innerHTML='<section class="view in">'+html+'</section>';
+    const wide=(V==="hub"||V==="album"||V==="intro")?" wide":"";
+    main.innerHTML='<section class="view in'+wide+'">'+html+'</section>';
     if(wire) wire();
     const h=main.querySelector("h1,h2"); if(h){h.setAttribute("tabindex","-1");h.focus({preventScroll:true});}
     window.scrollTo({top:0,behavior:reduce?"auto":"smooth"});
@@ -1057,18 +1128,19 @@ function intro(){
         ?'<img src="'+d.img+'" alt="'+esc(d.nome)+'" loading="lazy" style="object-position:'+(d.pos||"center")+'">'
         :faceSVG(d.face,i))+'</div>'
     +'<span class="nm">'+esc(d.nome)+'</span></div>').join("");
-  show('<div class="stg">'
+  show('<div class="stg introgrid"><div class="col-a">'
    +'<p class="kicker" style="animation-delay:.02s">Quiz · 13 por partida</p>'
    +'<h1 class="hero" style="animation-delay:.06s">Tre<i>ze</i></h1>'
    +'<p class="lede" style="animation-delay:.14s">Treze por partida, porque o cromossomo é o treze.</p>'
    +'<p class="body-t" style="animation-delay:.22s">A síndrome de Patau é uma cópia a mais do cromossomo 13. '
    +'Cada partida sorteia 13 perguntas de um banco de '+Q.length+', e você aposta o quanto tem certeza. '
    +'Os pontos abrem as outras atividades e o fliperama.</p>'
-   +'<div style="margin-top:30px;animation-delay:.3s"><p class="credline">Idealizado por</p>'
+   +'</div><div class="col-b">'
+   +'<div style="animation-delay:.3s"><p class="credline">Idealizado por</p>'
    +'<div class="devs">'+devs+'</div></div>'
    +'<div class="cta" style="animation-delay:.42s"><button class="btn" id="go1">Entrar na bancada</button></div>'
    +'<p class="body-t" style="font-size:13.5px;animation-delay:.5s;color:var(--bone-3)">Som e música podem ser desligados a qualquer momento no topo da tela.</p>'
-   +'</div>',
+   +'</div></div>',
   ()=>{ $("#go1").onclick=()=>{ auResume(); sfx("unlock"); go("hub"); }; });
 }
 
@@ -1410,7 +1482,7 @@ function karyoView(keep){
       b.onclick=()=>ktap(+b.dataset.p); });
     $("#giveup").onclick=()=>{ KS.fin=true; sfx("tap"); go("hub"); };
   };
-  if(keep){ main.innerHTML='<section class="view in">'+body+'</section>'; wire(); }
+  if(keep){ main.innerHTML='<section class="view in'+(V==="bowl"?" wide":"")+'">'+body+'</section>'; wire(); }
   else show(body,wire);
 }
 function ktap(id){
@@ -1492,7 +1564,7 @@ function mythView(keep){
     main.querySelectorAll("[data-m]").forEach(b=>b.onclick=()=>mtap(b.dataset.m==="1"));
     $("#giveup").onclick=()=>{ sfx("tap"); mythEnd(); };
   };
-  if(keep){ main.innerHTML='<section class="view in">'+body+'</section>'; wire(); }
+  if(keep){ main.innerHTML='<section class="view in'+(V==="bowl"?" wide":"")+'">'+body+'</section>'; wire(); }
   else show(body,wire);
 }
 function mtap(saidMito){
@@ -1571,11 +1643,11 @@ function bowlView(keep){
     $("#quitb").onclick=()=>{ sfx("tap"); bowlEnd(); };
     cancelAnimationFrame(braf); braf=requestAnimationFrame(bloop);
   };
-  if(keep){ main.innerHTML='<section class="view in">'+body+'</section>'; wire(); }
+  if(keep){ main.innerHTML='<section class="view in'+(V==="bowl"?" wide":"")+'">'+body+'</section>'; wire(); }
   else show(body,wire);
 }
 function fitLane(){
-  const cw=Math.min(bcv.parentElement.clientWidth,390);
+  const cw=Math.min(bcv.parentElement.clientWidth, innerWidth>=900?470:390);
   const dpr=Math.min(devicePixelRatio||1,2);
   bcv.style.width=cw+"px"; bcv.style.height=(cw*LH/LW)+"px";
   bcv.width=cw*dpr; bcv.height=cw*LH/LW*dpr;
