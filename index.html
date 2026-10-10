@@ -79,7 +79,12 @@
   .vsl .meta b .serif { color: var(--acc); font-size: 1.28em; line-height: 0.8; }
   .vsl .meta span { font-size: 13px; color: var(--ink2); white-space: nowrap; }
   .vsl .main { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000; opacity: 0; pointer-events: none; transition: opacity 0.5s var(--ease); z-index: 2; }
-  .vsl.playing .main { opacity: 1; pointer-events: auto; }
+  .vsl.playing .main { opacity: 1; pointer-events: none; }
+  .vsl .hold { position: absolute; inset: 0; z-index: 4; display: none; place-items: center; cursor: pointer; }
+  .vsl.playing .hold { display: grid; }
+  .vsl .hold i { width: 76px; height: 76px; border-radius: 50%; background: rgba(10,11,6,0.55); backdrop-filter: blur(6px); display: grid; place-items: center; opacity: 0; transition: opacity 0.3s; }
+  .vsl .hold i svg { width: 26px; height: 26px; margin-left: 4px; fill: var(--ink); }
+  .vsl.paused .hold i { opacity: 1; }
   .vsl.playing .frame { opacity: 0; pointer-events: none; }
   .vsl.playing { cursor: default; }
   .vsl .frame { transition: opacity 0.4s var(--ease); z-index: 3; }
@@ -412,7 +417,8 @@
 
     <div class="vsl rv d2" id="vsl" role="button" tabindex="0" aria-label="Assistir à apresentação">
       <video class="bgv" muted playsinline loop preload="none" poster="/cortex/v/dark.jpg" data-src="CDN/w/w2.mp4"></video>
-      <video class="main" id="vslv" playsinline controls preload="none" poster="/cortex/vsl/poster.jpg" src="https://cdn.jsdelivr.net/gh/orafaelcrv77/treze-patau@4aa2f6c8fc805bdc9a654f382a8309dc5f08316d/cortex/vsl/vsl.mp4"></video>
+      <video class="main" id="vslv" playsinline webkit-playsinline disablepictureinpicture disableremoteplayback controlslist="nodownload noplaybackrate nofullscreen noremoteplayback" preload="none" poster="/cortex/vsl/poster.jpg" src="https://cdn.jsdelivr.net/gh/orafaelcrv77/treze-patau@4aa2f6c8fc805bdc9a654f382a8309dc5f08316d/cortex/vsl/vsl.mp4"></video>
+      <div class="hold" id="vslHold"><i><svg viewBox="0 0 24 24"><path d="M7 4.5l12.5 7.5L7 19.5z"/></svg></i></div>
       <div class="frame">
         <div class="mid"><div class="play"><svg viewBox="0 0 24 24"><path d="M7 4.5l12.5 7.5L7 19.5z"/></svg></div></div>
         <div class="meta"><b>Assista antes de <span class="serif">tudo.</span></b><span>com som</span></div>
@@ -657,6 +663,16 @@ watch(vsl, (on) => { const v = $(".bgv", vsl); if (vsl.classList.contains("playi
 const vslv = $("#vslv");
 const tapVsl = () => { if (vsl.classList.contains("playing")) return; vsl.classList.add("playing"); vslv.muted = false; const p = vslv.play(); if (p) p.catch(() => {}); $(".bgv", vsl).pause(); };
 vslv.addEventListener("ended", () => { vsl.classList.remove("playing"); vslv.currentTime = 0; });
+// sem controles: sem acelerar, sem pular, sem baixar, sem ver a duração
+let vslMax = 0;
+vslv.addEventListener("timeupdate", () => { if (!vslv.seeking && vslv.currentTime > vslMax && vslv.currentTime - vslMax < 1.5) vslMax = vslv.currentTime; });
+vslv.addEventListener("seeking", () => { if (Math.abs(vslv.currentTime - vslMax) > 1 && vslv.currentTime !== 0) vslv.currentTime = vslMax; });
+vslv.addEventListener("ratechange", () => { if (vslv.playbackRate !== 1) vslv.playbackRate = 1; });
+vslv.addEventListener("ended", () => { vslMax = 0; });
+vslv.addEventListener("pause", () => vsl.classList.add("paused"));
+vslv.addEventListener("play", () => vsl.classList.remove("paused"));
+vsl.addEventListener("contextmenu", (e) => e.preventDefault());
+$("#vslHold").addEventListener("click", (e) => { e.stopPropagation(); if (vslv.paused) { const p = vslv.play(); if (p) p.catch(() => {}); } else vslv.pause(); });
 vsl.addEventListener("click", tapVsl);
 vsl.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); tapVsl(); } });
 
