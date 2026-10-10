@@ -78,6 +78,11 @@
   .vsl .meta b { font-weight: 900; font-size: clamp(18px, 3.4vw, 30px); letter-spacing: -0.03em; line-height: 1; }
   .vsl .meta b .serif { color: var(--acc); font-size: 1.28em; line-height: 0.8; }
   .vsl .meta span { font-size: 13px; color: var(--ink2); white-space: nowrap; }
+  .vsl .main { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #000; opacity: 0; pointer-events: none; transition: opacity 0.5s var(--ease); z-index: 2; }
+  .vsl.playing .main { opacity: 1; pointer-events: auto; }
+  .vsl.playing .frame { opacity: 0; pointer-events: none; }
+  .vsl.playing { cursor: default; }
+  .vsl .frame { transition: opacity 0.4s var(--ease); z-index: 3; }
   .vsl .soon { position: absolute; left: 50%; top: 22px; transform: translate(-50%, -12px); background: var(--ink); color: var(--bg); font-weight: 700; font-size: 13px; padding: 8px 14px; border-radius: 999px; opacity: 0; transition: 0.3s var(--ease); white-space: nowrap; }
   .vsl.tap .soon { opacity: 1; transform: translate(-50%, 0); }
 
@@ -407,11 +412,11 @@
 
     <div class="vsl rv d2" id="vsl" role="button" tabindex="0" aria-label="Assistir à apresentação">
       <video class="bgv" muted playsinline loop preload="none" poster="/cortex/v/dark.jpg" data-src="CDN/w/w2.mp4"></video>
+      <video class="main" id="vslv" playsinline controls preload="none" poster="/cortex/vsl/poster.jpg" src="https://cdn.jsdelivr.net/gh/orafaelcrv77/treze-patau@4aa2f6c8fc805bdc9a654f382a8309dc5f08316d/cortex/vsl/vsl.mp4"></video>
       <div class="frame">
         <div class="mid"><div class="play"><svg viewBox="0 0 24 24"><path d="M7 4.5l12.5 7.5L7 19.5z"/></svg></div></div>
         <div class="meta"><b>Assista antes de <span class="serif">tudo.</span></b><span>com som</span></div>
       </div>
-      <div class="soon">A apresentação entra no ar em breve</div>
     </div>
 
     <div class="act rv d3">
@@ -648,8 +653,10 @@ buildWall($("#wall2"), nCols, 7);
 
 /* apresentação: espaço reservado */
 const vsl = $("#vsl");
-watch(vsl, (on) => { const v = $(".bgv", vsl); on ? play(v) : v.pause(); }, { threshold: 0.2 });
-const tapVsl = () => { vsl.classList.add("tap"); clearTimeout(vsl._t); vsl._t = setTimeout(() => vsl.classList.remove("tap"), 2400); };
+watch(vsl, (on) => { const v = $(".bgv", vsl); if (vsl.classList.contains("playing")) { if (!on) $("#vslv").pause(); return; } on ? play(v) : v.pause(); }, { threshold: 0.2 });
+const vslv = $("#vslv");
+const tapVsl = () => { if (vsl.classList.contains("playing")) return; vsl.classList.add("playing"); vslv.muted = false; const p = vslv.play(); if (p) p.catch(() => {}); $(".bgv", vsl).pause(); };
+vslv.addEventListener("ended", () => { vsl.classList.remove("playing"); vslv.currentTime = 0; });
 vsl.addEventListener("click", tapVsl);
 vsl.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); tapVsl(); } });
 
