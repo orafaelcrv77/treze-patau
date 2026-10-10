@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>CÓRTEX · Sua IA já pensa. Agora ela faz vídeo.</title>
-<meta name="description" content="O Córtex é uma inteligência de vídeo pra sua IA. Você escreve o que quer e recebe o vídeo pronto: roteiro, cena, voz, legenda e motion." />
+<meta name="description" content="O Córtex ensina a sua IA a fazer vídeo. Você escreve o que quer e recebe o vídeo pronto: roteiro, cena, voz, legenda e motion." />
 <meta property="og:title" content="CÓRTEX · Sua IA já pensa. Agora ela faz vídeo." />
 <meta property="og:description" content="Você escreve. A sua IA entrega o vídeo pronto. Sem câmera, sem editor." />
 <meta property="og:image" content="https://orafaelcrv.com.br/cortex/v/camila.jpg" />
@@ -76,13 +76,22 @@
   .vsl .play svg { width: 28px; height: 28px; margin-left: 4px; fill: var(--bg); }
   .vsl .meta { display: flex; justify-content: space-between; align-items: end; gap: 16px; text-align: left; }
   .vsl .meta b { font-weight: 900; font-size: clamp(18px, 3.4vw, 30px); letter-spacing: -0.03em; line-height: 1; }
-  .vsl .meta b .serif { color: var(--acc); }
+  .vsl .meta b .serif { color: var(--acc); font-size: 1.28em; line-height: 0.8; }
   .vsl .meta span { font-size: 13px; color: var(--ink2); white-space: nowrap; }
   .vsl .soon { position: absolute; left: 50%; top: 22px; transform: translate(-50%, -12px); background: var(--ink); color: var(--bg); font-weight: 700; font-size: 13px; padding: 8px 14px; border-radius: 999px; opacity: 0; transition: 0.3s var(--ease); white-space: nowrap; }
   .vsl.tap .soon { opacity: 1; transform: translate(-50%, 0); }
 
-  .act { display: flex; flex-direction: column; align-items: center; gap: 16px; margin-top: 30px; }
+  .act { display: flex; justify-content: center; margin-top: 34px; }
   .act .buy { width: 100%; max-width: 420px; }
+  /* botão vivo: respira, emite um anel e a seta chama pro clique */
+  .buy.live { position: relative; isolation: isolate; animation: breathe 2.8s var(--ease) infinite; }
+  .buy.live::before, .buy.live::after { content: ""; position: absolute; inset: 0; border-radius: inherit; border: 2px solid var(--acc); z-index: -1; animation: ring 2.8s var(--ease) infinite; }
+  .buy.live::after { animation-delay: 1.4s; }
+  .buy.live .ar svg { animation: nudge 2.8s var(--ease) infinite; }
+  .buy.live:hover { animation-play-state: paused; }
+  @keyframes breathe { 0%, 100% { transform: scale(1); box-shadow: 0 10px 40px -12px rgba(196,255,77,0.35); } 50% { transform: scale(1.025); box-shadow: 0 16px 60px -10px rgba(196,255,77,0.6); } }
+  @keyframes ring { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(1.18, 1.5); opacity: 0; } }
+  @keyframes nudge { 0%, 60%, 100% { transform: translateX(0); } 70% { transform: translateX(4px); } 80% { transform: translateX(0); } 90% { transform: translateX(3px); } }
   .trust { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 20px; font-size: 13px; color: var(--mut); }
   .trust span + span::before { content: "·"; margin-right: 20px; color: var(--line2); }
   @media (max-width: 599px) { .trust { gap: 4px 14px; } .trust span + span::before { display: none; } }
@@ -176,7 +185,7 @@
   /* ================= ESTILOS ================= */
   .idx { margin-top: 50px; border-top: 1px solid var(--line2); }
   .row { border-bottom: 1px solid var(--line); }
-  .row > button { width: 100%; display: grid; grid-template-columns: 70px 1fr auto; gap: 12px; align-items: baseline; padding: 22px 0; text-align: left; }
+  .row > button { width: 100%; display: grid; grid-template-columns: 70px 1fr; gap: 12px; align-items: baseline; padding: 22px 0; text-align: left; }
   .row .no { font-family: "Instrument Serif", serif; font-style: italic; font-size: 22px; color: var(--mut); transition: color 0.3s; }
   .row .nm { font-weight: 900; font-size: clamp(24px, 5.6vw, 44px); letter-spacing: -0.04em; line-height: 1; transition: transform 0.4s var(--ease); }
   .row .tg { font-size: 12px; color: var(--mut); white-space: nowrap; }
@@ -187,16 +196,17 @@
   .row .body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.5s var(--ease); }
   .row.open .body { grid-template-rows: 1fr; }
   .row .body > div { overflow: hidden; }
-  .row .in { display: grid; grid-template-columns: 130px 1fr; gap: 20px; padding: 0 0 28px 82px; align-items: start; }
+  .row .in { padding: 0 0 28px 82px; max-width: 760px; }
+  .row.more .mr { display: grid; grid-template-columns: 70px 1fr; gap: 12px; align-items: baseline; padding: 26px 0; }
+  .row.more .no { color: var(--acc); font-size: 30px; line-height: 1; }
+  .row.more .nm { color: var(--ink2); }
+  .row.more .nm .serif { color: var(--acc); font-weight: 400; letter-spacing: -0.01em; }
   .row .in .mini { aspect-ratio: 9 / 16; border-radius: 12px; overflow: hidden; background: #111; box-shadow: 0 0 0 1px rgba(255,255,255,0.08); }
   .row .in .mini video { width: 100%; height: 100%; object-fit: cover; }
   .row .in .mini.empty { display: grid; place-items: center; text-align: center; font-size: 11px; color: var(--mut); padding: 10px; background: repeating-linear-gradient(-45deg, #0f1114 0 8px, #121418 8px 16px); }
   .row .in p { font-size: 15px; color: var(--ink2); }
   .row .in p b { display: block; color: var(--ink); font-weight: 700; margin-bottom: 6px; }
   .row .in .ped { margin-top: 14px; font-family: "Instrument Serif", serif; font-style: italic; font-size: 21px; line-height: 1.25; color: var(--ink); }
-  .float-prev { position: fixed; z-index: 30; width: 170px; aspect-ratio: 9 / 16; border-radius: 16px; overflow: hidden; pointer-events: none; opacity: 0; transform: translate(-50%, -50%) scale(0.85) rotate(-4deg); transition: opacity 0.25s, transform 0.4s var(--ease); box-shadow: 0 40px 80px -20px rgba(0,0,0,0.9), 0 0 0 1px rgba(255,255,255,0.1); background: #000; }
-  .float-prev.on { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(-4deg); }
-  .float-prev video { width: 100%; height: 100%; object-fit: cover; }
 
   /* ================= A CONTA ================= */
   .money { display: grid; gap: 30px; margin-top: 50px; }
@@ -285,9 +295,9 @@
   .offer li::before { content: ""; width: 18px; height: 18px; border-radius: 50%; background: var(--acc) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M6 12.5l4 4L18 8' fill='none' stroke='%230a0b06' stroke-width='3'/></svg>") center/12px no-repeat; margin-top: 2px; }
   .offer .go { padding: 0 24px 24px; }
   .offer .go .buy { width: 100%; }
-  .offer .fine { padding: 0 24px 26px; font-size: 13px; color: var(--mut); line-height: 1.5; }
-  .guar { display: grid; grid-template-columns: 76px 1fr; gap: 18px; align-items: center; padding: 22px; border-radius: 22px; box-shadow: 0 0 0 1px var(--line2); }
-  .seal { width: 76px; height: 76px; border-radius: 50%; display: grid; place-items: center; background: var(--bg2); box-shadow: inset 0 0 0 1px var(--line2); text-align: center; }
+  .offer .fine { padding: 0 24px 20px; margin-top: -8px; font-size: 13px; color: var(--mut); line-height: 1.5; text-align: center; }
+  .guar { display: grid; grid-template-columns: 64px 1fr; gap: 18px; align-items: center; margin: 0 24px 24px; padding: 18px; border-radius: 18px; background: var(--bg); box-shadow: 0 0 0 1px var(--line2); }
+  .seal { width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; background: var(--bg2); box-shadow: inset 0 0 0 1px var(--line2); text-align: center; }
   .seal b { font-weight: 900; font-size: 30px; line-height: 0.8; }
   .seal b small { display: block; font-size: 9px; letter-spacing: 0.1em; margin-top: 4px; color: var(--ink2); }
   .guar p { font-size: 15px; color: var(--ink2); }
@@ -316,11 +326,10 @@
   footer .wrap { display: flex; justify-content: space-between; gap: 14px; flex-wrap: wrap; padding-top: 28px; padding-bottom: calc(110px + env(safe-area-inset-bottom)); font-size: 13px; color: var(--mut); border-top: 1px solid var(--line); }
   footer a { color: var(--ink2); text-decoration: none; }
 
-  .dock { position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 50; display: flex; align-items: center; gap: 12px; padding: 8px 8px 8px 20px; border-radius: 999px; background: rgba(18,20,23,0.88); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 20px 50px -10px rgba(0,0,0,0.9); transform: translateY(160%); transition: transform 0.5s var(--ease); }
+  .dock { position: fixed; right: 14px; bottom: calc(14px + env(safe-area-inset-bottom)); z-index: 50; display: inline-flex; align-items: center; gap: 12px; padding: 8px 8px 8px 20px; border-radius: 999px; background: var(--acc); color: #0a0b06; font-weight: 900; font-size: 16px; letter-spacing: -0.01em; box-shadow: 0 18px 40px -12px rgba(0,0,0,0.9), 0 0 0 6px rgba(196,255,77,0.12); transform: translateY(160%); transition: transform 0.5s var(--ease); }
   .dock.on { transform: none; }
-  .dock p { flex: 1; font-size: 13px; color: var(--ink2); line-height: 1.2; }
-  .dock p b { display: block; color: var(--ink); font-weight: 900; font-size: 15px; letter-spacing: 0.04em; }
-  .dock button { background: var(--acc); color: #0a0b06; font-weight: 900; font-size: 15px; padding: 13px 20px; border-radius: 999px; }
+  .dock .ar { width: 36px; height: 36px; border-radius: 50%; background: #0a0b06; color: var(--acc); display: grid; place-items: center; }
+  .dock .ar svg { width: 15px; height: 15px; }
 
   @media (max-width: 899px) {
     .col { width: 116px; }
@@ -332,17 +341,15 @@
     .vsl .meta > span { display: none; }
     .phone { width: min(240px, 60vw); }
     .stage { align-items: start; padding-top: 8vh; }
-    .row > button { grid-template-columns: 56px 1fr; }
-    .row .tg { grid-column: 2; margin-top: 4px; }
-    .row .in { grid-template-columns: 100px 1fr; padding-left: 0; }
+    .row > button, .row.more .mr { grid-template-columns: 56px 1fr; }
+    .row .in { padding-left: 56px; }
     .vs .r { grid-template-columns: 0.8fr 1fr 1fr; }
     .vs .r > div { padding: 14px 10px; font-size: 13px; }
   }
   @media (min-width: 900px) {
     :root { --pad: 40px; }
     .hero { padding-top: 150px; padding-bottom: 90px; }
-    .act { flex-direction: row; justify-content: center; gap: 30px; }
-    .act .buy { width: auto; min-width: 360px; }
+    .act .buy { width: auto; min-width: 380px; }
     .gal-head { grid-template-columns: 1fr auto; }
     .reel-track { padding-left: calc(50vw - 160px); padding-right: calc(50vw - 160px); gap: 28px; }
     .card { width: 320px; }
@@ -356,8 +363,8 @@
     .forwho { grid-template-columns: 1fr 1fr; column-gap: 60px; }
     .pack { grid-template-columns: 1fr 1fr; }
     .pack .item.main { grid-column: span 2; }
-    .offer-wrap { grid-template-columns: minmax(0, 560px) minmax(0, 1fr); gap: 60px; }
-    .dock { left: auto; right: 24px; bottom: 24px; width: 420px; }
+    .offer-wrap { grid-template-columns: minmax(0, 600px); justify-content: center; }
+    .dock { right: 28px; bottom: 28px; }
   }
 </style>
 </head>
@@ -372,7 +379,7 @@
   </div></div>
   <div class="wrap inner">
     <h1 class="rv">Sua IA já pensa.<span class="serif">Agora ela faz vídeo.</span></h1>
-    <p class="lede rv d1">O Córtex ensina o Claude a fazer vídeo. Você escreve o que quer e recebe o vídeo pronto: roteiro, cena, voz, legenda e animação.</p>
+    <p class="lede rv d1">O Córtex ensina a sua IA a fazer vídeo. Você escreve o que quer e recebe o vídeo pronto: roteiro, cena, voz, legenda e animação.</p>
 
     <div class="vsl rv d2" id="vsl" role="button" tabindex="0" aria-label="Assistir à apresentação">
       <video class="bgv" muted playsinline loop preload="none" poster="/cortex/v/dark.jpg" data-src="CDN/w/w2.mp4"></video>
@@ -384,8 +391,7 @@
     </div>
 
     <div class="act rv d3">
-      <button class="buy" type="button">Quero o Córtex <span class="ar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12h14m-6-6l6 6-6 6"/></svg></span></button>
-      <div class="trust"><span>R$ 97 à vista</span><span>ou 12x de R$ 10,03</span><span>7 dias de garantia</span></div>
+      <button class="buy live" type="button" data-go="oferta">Quero o Córtex <span class="ar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12h14m-6-6l6 6-6 6"/></svg></span></button>
     </div>
   </div>
 </header>
@@ -397,10 +403,10 @@
         <h2 class="h2 rv">Nenhum desses vídeos passou <span class="serif">por um editor.</span></h2>
         <p class="lead rv d1">Vídeos de campanhas reais, feitos com o processo que virou o Córtex. Toque em ouvir pra ligar o som.</p>
       </div>
-      <div class="gal-nav rv d2"><span class="pos" id="galPos">1 / 6</span><button id="galPrev" type="button" aria-label="Vídeo anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg></button><button id="galNext" type="button" aria-label="Próximo vídeo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button></div>
+      <div class="gal-nav rv d2"><span class="pos" id="galPos">1 / 5</span><button id="galPrev" type="button" aria-label="Vídeo anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 6l-6 6 6 6"/></svg></button><button id="galNext" type="button" aria-label="Próximo vídeo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg></button></div>
     </div>
     <div class="reel-track" id="track"></div>
-    <p class="gal-note">Black dos Sonhos é uma campanha de varejo real. O vídeo do Lucas foi gravado no celular e finalizado pela IA. Os outros não tiveram nenhuma gravação.</p>
+    <p class="gal-note">Black dos Sonhos é uma campanha de varejo real. Nenhum desses vídeos teve gravação: personagem, cenas, voz e animação foram feitas por IA.</p>
   </section>
 
   <section class="sec" id="processo">
@@ -410,7 +416,7 @@
     </div>
     <div class="wrap story">
       <div class="stage"><div class="phone"><div class="isl"></div><div class="scr" id="stScr">
-        <div class="scene sc-chat on" data-s="0"><div class="bub" id="typed"><span class="cur"></span></div><div class="hint">você, conversando com o Claude</div></div>
+        <div class="scene sc-chat on" data-s="0"><div class="bub" id="typed"><span class="cur"></span></div><div class="hint">você, conversando com a sua IA</div></div>
         <div class="scene sc-script" data-s="1">
           <div class="ln"><b>gancho</b>Janeiro vai ser o mês mais difícil da Camila.</div>
           <div class="ln"><b>dor</b>O caixa cai, a vitrine não gira, o boleto chega igual.</div>
@@ -439,15 +445,15 @@
         <div class="mode-copy rv d2" id="modeCopy"></div>
       </div>
       <div class="mode-phone rv d2"><div class="phone"><div class="isl"></div><div class="scr">
-        <video class="on" id="mv0" muted playsinline loop preload="none" poster="/cortex/v/camila.jpg" data-src="CDN/camila.mp4"></video>
-        <video id="mv1" muted playsinline loop preload="none" poster="/cortex/v/lucas.jpg" data-src="CDN/lucas.mp4"></video>
+        <video class="on" id="mv0" muted playsinline loop preload="none" poster="/cortex/v/linha.jpg" data-src="CDN/linha.mp4"></video>
+        <video id="mv1" muted playsinline loop preload="none" poster="/cortex/v/camila.jpg" data-src="CDN/camila.mp4"></video>
       </div></div><button class="snd2" id="modeSnd" type="button">ouvir com som</button></div>
     </div>
   </section>
 
   <section class="sec wrap" id="estilos">
-    <h2 class="h2 rv">Dez estilos. <span class="serif">Um pedido pra cada.</span></h2>
-    <p class="lead rv d1">Cada estilo vem com um vídeo de exemplo e o pedido exato que gerou ele. Toque pra abrir.</p>
+    <h2 class="h2 rv">Estilo pra cada vídeo. <span class="serif">Um pedido pra cada.</span></h2>
+    <p class="lead rv d1">Escolha o estilo, escreva o pedido, receba o vídeo. Toque em um pra ver como pedir.</p>
     <div class="idx rv d2" id="idx"></div>
   </section>
 
@@ -464,14 +470,14 @@
           <div class="bar"><div class="t"><span>Editor contratado, só o salário</span><b>R$ 4.000</b></div><div class="b"><i id="bClt"></i></div></div>
           <div class="bar cx"><div class="t"><span>Córtex, pagamento único</span><b>R$ 97</b></div><div class="b"><i id="bCx"></i></div></div>
         </div>
-        <div class="save"><span>Diferença no primeiro mês, contra a opção de editor mais barata</span><b id="vSave"></b><small>Sem contar a assinatura do Claude, a partir de US$ 20 por mês.</small></div>
+        <div class="save"><span>Diferença no primeiro mês, contra a opção de editor mais barata</span><b id="vSave"></b><small>Sem contar a assinatura da sua IA, a partir de US$ 20 por mês.</small></div>
       </div>
       <div class="rv d1">
         <div class="refs">
           <div><b>R$ 200 a R$ 600</b><span>por vídeo, edição simples de até 5 minutos</span></div>
           <div><b>R$ 600 a R$ 2.000</b><span>por vídeo, edição com motion e efeitos</span></div>
           <div><b>R$ 4.000 por mês</b><span>salário de editor de Reels contratado em São Paulo</span></div>
-          <div class="us"><b>R$ 97, uma vez</b><span>o Córtex completo, com os 5 módulos e os 10 estilos</span></div>
+          <div class="us"><b>R$ 97, uma vez</b><span>o Córtex completo, com os 5 módulos e o catálogo de estilos</span></div>
         </div>
         <p class="src">Fontes: <a href="https://www.freelasemcrise.com.br/quanto-cobrar/edicao-video" target="_blank" rel="noopener">tabela de preços de edição de vídeo FreelaSemCrise 2026</a> e vaga de editor de vídeo para Reels em São Paulo, publicada em 31/07/2026 no Empregando Brasil. Valores de referência: o preço de cada profissional varia.</p>
       </div>
@@ -502,12 +508,12 @@
     <h2 class="h2 rv">O que chega <span class="serif">pra você.</span></h2>
     <div class="pack">
       <div class="item main rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M10 9v1m0 2v1m0 2v1"/></svg></div><div><b>Implante Córtex</b><p>Um arquivo que a sua IA instala sozinha. Dentro, os cinco módulos: roteiro, cena, voz, montagem e finalização.</p></div></div>
-      <div class="item rv d1"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="16" rx="2"/><rect x="14" y="4" width="7" height="16" rx="2"/></svg></div><div><b>Catálogo com 10 estilos</b><p>O vídeo de exemplo e o pedido exato de cada estilo.</p></div></div>
+      <div class="item rv d1"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="16" rx="2"/><rect x="14" y="4" width="7" height="16" rx="2"/></svg></div><div><b>Catálogo de estilos</b><p>Os estilos prontos pra usar, cada um com o pedido exato que gera ele.</p></div></div>
       <div class="item rv d2"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg></div><div><b>130 pedidos prontos</b><p>Separados por uso: conteúdo, anúncio, lançamento, perfil dark e loja.</p></div></div>
-      <div class="item rv"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M10 9l5 2-5 2z"/></svg></div><div><b>Aulas curtas</b><p>Instalar, configurar as contas e fazer o primeiro vídeo.</p></div></div>
+      <div class="item rv"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M10 9l5 2-5 2z"/></svg></div><div><b>Vídeo de instalação</b><p>Um vídeo curto mostrando como entregar o arquivo pra sua IA e fazer o primeiro vídeo.</p></div></div>
       <div class="item rv d1"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.6L20 9.3l-4 4 1 5.7-5-2.8-5 2.8 1-5.7-4-4 5.4-.7z"/></svg></div><div><b>Bônus</b><p>O guia Perfil Dark do zero e 35 pedidos pra sua primeira semana.</p></div></div>
     </div>
-    <p class="req rv"><b>Precisa ter:</b> um Mac com chip Apple (a versão pra Windows está em testes) e o Claude no plano pago, a partir de US$ 20 por mês, pago direto pra Anthropic. A voz e as imagens usam serviços com plano grátis pra começar.</p>
+    <p class="req rv"><b>Precisa ter:</b> um computador, Mac ou Windows, e uma IA no plano pago: o Claude (com o Claude Code) ou o ChatGPT (com o Codex). Essa assinatura é paga direto pra eles, a partir de US$ 20 por mês, e não entra no valor do Córtex. A voz e as imagens usam serviços com plano grátis pra começar.</p>
   </section>
 
   <section class="sec wrap" id="quem">
@@ -528,28 +534,28 @@
           <li>Implante Córtex com os 5 módulos</li>
           <li>Catálogo com 10 estilos</li>
           <li>130 pedidos prontos</li>
-          <li>Aulas curtas de instalação e primeiro vídeo</li>
+          <li>Vídeo de instalação</li>
           <li>Bônus: guia Perfil Dark e pedidos da primeira semana</li>
         </ul>
         <div class="go"><button class="buy" type="button">Quero o Córtex <span class="ar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12h14m-6-6l6 6-6 6"/></svg></span></button></div>
-        <p class="fine">Pix, cartão ou boleto. Funciona no Mac com chip Apple e com o Claude no plano pago, cobrado à parte pela Anthropic.</p>
+        <p class="fine">Pagamento no Pix ou no cartão.</p>
+        <div class="guar"><div class="seal"><b>7<small>DIAS</small></b></div><p><b>Garantia de 7 dias.</b>Se o Implante não instalar no seu computador ou se você não gostar, pede o reembolso e recebe tudo de volta.</p></div>
       </div>
-      <div class="guar rv d1"><div class="seal"><b>7<small>DIAS</small></b></div><p><b>Garantia de 7 dias.</b>Se o Implante não instalar no seu computador ou se você não gostar, pede o reembolso e recebe tudo de volta.</p></div>
     </div>
   </section>
 
   <section class="sec wrap" id="perguntas">
     <h2 class="h2 rv">Perguntas, <span class="serif">sem rodeio.</span></h2>
     <div class="faq rv d1">
-      <details open><summary>O que é o Implante Córtex?<i></i></summary><p>Um conjunto de instruções e ferramentas de vídeo que a sua IA instala no seu computador. Depois disso, você pede o vídeo em português e ela faz: roteiro, cena, voz, legenda e animação.</p></details>
+      <details open><summary>O que é o Implante Córtex?<i></i></summary><p>Um conjunto de instruções e ferramentas de vídeo que a sua IA instala no seu computador, seja o Claude ou o ChatGPT. Depois disso, você pede o vídeo em português e ela faz: roteiro, cena, voz, legenda e animação.</p></details>
       <details><summary>Preciso saber editar?<i></i></summary><p>Não. Você escreve o que quer e escolhe o estilo. Quem monta o vídeo é a IA.</p></details>
-      <details><summary>Serve se eu gravo meus vídeos?<i></i></summary><p>Serve. No modo finalização, você manda a gravação e o Córtex coloca legenda, título na tela e animação por cima. O vídeo do Lucas, aqui em cima, foi feito assim.</p></details>
+      <details><summary>Serve se eu gravo meus vídeos?<i></i></summary><p>Serve. No modo finalização, você manda a gravação e o Córtex coloca legenda, título na tela e animação por cima.</p></details>
       <details><summary>Serve pra anúncio?<i></i></summary><p>Serve. O módulo de roteiro ainda avisa quando uma frase pode ser barrada pela plataforma de anúncio.</p></details>
-      <details><summary>Funciona no Windows?<i></i></summary><p>Hoje o Córtex funciona no Mac com chip Apple. A versão pra Windows está em testes. Se o seu computador for Windows, espere a confirmação antes de comprar.</p></details>
-      <details><summary>Quanto custam as outras ferramentas?<i></i></summary><p>O Claude no plano pago custa a partir de US$ 20 por mês. A voz e as imagens usam serviços com plano grátis pra começar. As aulas mostram cada conta, passo a passo.</p></details>
+      <details><summary>Funciona no Windows?<i></i></summary><p>Funciona. O Córtex roda em computador Mac ou Windows.</p></details>
+      <details><summary>Qual IA eu preciso?<i></i></summary><p>O Claude, com o Claude Code, ou o ChatGPT, com o Codex, os dois no plano pago, a partir de US$ 20 por mês. Você paga direto pra eles, não pra gente. A voz e as imagens usam serviços com plano grátis pra começar.</p></details>
       <details><summary>Os vídeos ficam com cara de template?<i></i></summary><p>Não. Cada vídeo nasce do seu pedido e as cenas são criadas na hora. O estilo dá a linguagem, o conteúdo é sempre seu.</p></details>
-      <details><summary>Meus vídeos vão pra internet?<i></i></summary><p>Os arquivos ficam no seu computador. O texto do pedido passa pela sua conta do Claude, como qualquer conversa sua com ele.</p></details>
-      <details><summary>E se não instalar?<i></i></summary><p>As aulas mostram a instalação e a própria IA te guia em cada passo. Se mesmo assim não der, a garantia de 7 dias cobre.</p></details>
+      <details><summary>Meus vídeos vão pra internet?<i></i></summary><p>Os arquivos ficam no seu computador. O texto do pedido passa pela sua conta da IA, como qualquer conversa sua com ela.</p></details>
+      <details><summary>E se não instalar?<i></i></summary><p>O vídeo de instalação mostra o caminho e a própria IA te guia em cada passo. Se mesmo assim não der, a garantia de 7 dias cobre.</p></details>
     </div>
   </section>
 
@@ -558,15 +564,13 @@
     <div class="shade"></div>
     <div class="wrap">
       <h2 class="rv">Você escreve.<span class="serif">O Córtex entrega.</span></h2>
-      <button class="buy rv d1" type="button">Quero o Córtex <span class="ar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12h14m-6-6l6 6-6 6"/></svg></span></button>
-      <div class="trust rv d2"><span>R$ 97 à vista</span><span>ou 12x de R$ 10,03</span><span>7 dias de garantia</span></div>
+      <button class="buy live rv d1" type="button" data-go="oferta">Quero o Córtex <span class="ar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12h14m-6-6l6 6-6 6"/></svg></span></button>
     </div>
   </section>
 </main>
 
 <footer><div class="wrap"><span>CÓRTEX · um produto de Rafael Carvalho</span><a href="https://instagram.com/orafaelcrv" target="_blank" rel="noopener">@orafaelcrv</a></div></footer>
-<div class="dock" id="dock"><p><b>CÓRTEX</b>R$ 97 ou 12x de R$ 10,03</p><button type="button">Quero o Córtex</button></div>
-<div class="float-prev" id="fprev"><video muted playsinline loop preload="none"></video></div>
+<button class="dock" id="dock" type="button" data-go="oferta">Quero o Córtex <span class="ar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6"><path d="M5 12h14m-6-6l6 6-6 6"/></svg></span></button>
 
 <script>
 const CDN = "https://cdn.jsdelivr.net/gh/orafaelcrv77/treze-patau@a90ea6452cb7c3998fe09ab4d21eb14505f1c66c/cortex/v/";
@@ -589,7 +593,7 @@ function buildWall(el, n, seed) {
   $$(".col", el).forEach((col, c) => {
     const per = innerWidth < 900 ? 7 : 6, tiles = [];
     for (let k = 0; k < per; k++) {
-      const id = ((seed + c * 5 + k * 3) % 14) + 1, vid = (c + k) % 2 === 0;
+      const POOL = [1, 2, 3, 4, 5, 8, 9, 10, 11, 12, 13, 14], id = POOL[(seed + c * 5 + k * 3) % POOL.length], vid = (c + k) % 2 === 0;
       const t = document.createElement("div"); t.className = "tile";
       t.innerHTML = vid ? `<video muted playsinline loop preload="none" poster="/cortex/v/w/w${id}.jpg" data-src="CDN/w/w${id}.mp4"></video>` : `<img src="/cortex/v/w/w${id}.jpg" alt="" loading="lazy" decoding="async" />`;
       col.appendChild(t); tiles.push(t);
@@ -625,7 +629,6 @@ vsl.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ")
 /* galeria */
 const GAL = [
   { v: "camila", t: "Personagem criada por IA", d: "Uma lojista que não existe, numa loja que não existe. Roteiro, cenas, voz e animação.", c: "campanha Black dos Sonhos" },
-  { v: "lucas", t: "Gravação finalizada", d: "Gravado no celular. Títulos, legenda e animação entraram depois, pela IA.", c: "campanha Black dos Sonhos" },
   { v: "dark", t: "Frase de impacto e plano-sequência", d: "Abre como reel de motivação e vira explicação. Nenhuma gravação.", c: "perfil @orafaelcrv" },
   { v: "ademar", t: "Personagem ilustrado", d: "Seu Ademar conta 40 anos de Black Friday, desenhado e animado.", c: "campanha Black dos Sonhos" },
   { v: "linha", t: "Animação explicativa", d: "Uma linha do tempo que se desenha na tela enquanto a voz explica.", c: "campanha Black dos Sonhos" },
@@ -674,8 +677,8 @@ function pill(seg, i) { const b = $$("button", seg)[i], p = $(".pill", seg); p.s
 
 /* dois modos */
 const MODES = [
-  { h: "Do zero, sem câmera.", p: "Você escreve o tema e escolhe o estilo. O Córtex escreve o roteiro, cria as cenas e a personagem, narra, anima e entrega.", ex: "No celular: o vídeo da Camila, que não teve nenhuma gravação." },
-  { h: "A sua gravação, finalizada.", p: "Você manda o vídeo que gravou e diz o que quer. O Córtex coloca título na tela, legenda no tempo da fala e animação por cima.", ex: "No celular: o Lucas gravou no celular. Todo o resto veio depois." }
+  { h: "Do zero, sem câmera.", p: "Você escreve o tema e escolhe o estilo. O Córtex escreve o roteiro, narra e desenha cada ideia na tela, no ritmo da voz.", ex: "No celular: só a voz e a animação por cima. Nenhuma imagem gravada." },
+  { h: "As suas cenas, finalizadas.", p: "Você manda as cenas e diz o que quer. O Córtex coloca título na tela, legenda no tempo da fala, destaques e animação por cima.", ex: "No celular: cenas de uma loja que viraram anúncio com título, legenda e motion." }
 ];
 let mode = 0, modeVis = false; const tg = $("#modeTg");
 function renderMode() {
@@ -703,19 +706,13 @@ const STY = [
   { n: "Pergunta que provoca", v: "", d: "Feito pra gerar comentário e alimentar a sua automação de direct.", p: "“Pergunta polêmica sobre dinheiro pra gerar comentário.”" }
 ];
 const nums = ["um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez"];
-$("#idx").innerHTML = STY.map((s, i) => `<div class="row" data-v="${s.v}"><button type="button" aria-expanded="false"><span class="no">${nums[i]}</span><span class="nm">${s.n}</span><span class="tg${s.v ? " has" : ""}">${s.v ? "com exemplo" : "exemplo em produção"}</span></button><div class="body"><div><div class="in"><div class="mini${s.v ? "" : " empty"}">${s.v ? `<video muted playsinline loop preload="none" poster="/cortex/v/${s.v}.jpg" data-src="CDN/${s.v}.mp4"></video>` : "exemplo em produção"}</div><div><p><b>${s.n}</b>${s.d}</p><p class="ped">${s.p}</p></div></div></div></div></div>`).join("");
-const fp = $("#fprev"), fpv = $("video", fp);
-$$("#idx .row").forEach((r) => {
+$("#idx").innerHTML = STY.map((s, i) => `<div class="row"><button type="button" aria-expanded="false"><span class="no">${nums[i]}</span><span class="nm">${s.n}</span></button><div class="body"><div><div class="in"><div><p>${s.d}</p><p class="ped">${s.p}</p></div></div></div></div></div>`).join("") + `<div class="row more"><div class="mr"><span class="no">+</span><span class="nm">e muito mais<span class="serif">, é só pedir.</span></span></div></div>`;
+$$("#idx .row:not(.more)").forEach((r) => {
   $("button", r).addEventListener("click", () => {
     const open = !r.classList.contains("open");
-    $$("#idx .row.open").forEach((o) => { if (o !== r) { o.classList.remove("open"); $("button", o).setAttribute("aria-expanded", "false"); const v = $("video", o); if (v) v.pause(); } });
+    $$("#idx .row.open").forEach((o) => { if (o !== r) { o.classList.remove("open"); $("button", o).setAttribute("aria-expanded", "false"); } });
     r.classList.toggle("open", open); $("button", r).setAttribute("aria-expanded", open);
-    const v = $("video", r); if (v) open ? play(v) : v.pause();
-    fp.classList.remove("on"); fpv.pause();
   });
-  r.addEventListener("pointerenter", (e) => { if (!isDesk() || e.pointerType !== "mouse" || !r.dataset.v || r.classList.contains("open")) return; const s = CDN + r.dataset.v + ".mp4"; if (fpv.getAttribute("src") !== s) { fpv.src = s; fpv.poster = `/cortex/v/${r.dataset.v}.jpg`; } fpv.play().catch(() => {}); fp.classList.add("on"); });
-  r.addEventListener("pointerleave", () => { fp.classList.remove("on"); fpv.pause(); });
-  r.addEventListener("pointermove", (e) => { fp.style.left = Math.min(innerWidth - 100, e.clientX + 140) + "px"; fp.style.top = e.clientY + "px"; });
 });
 
 /* a conta */
@@ -743,6 +740,9 @@ renderPay();
 const repill = () => { pill(tg, mode); pill(ps, pay); };
 addEventListener("resize", repill);
 if (document.fonts) document.fonts.ready.then(repill);
+
+/* botões que levam pra oferta */
+$$("[data-go]").forEach((b) => b.addEventListener("click", () => document.getElementById(b.dataset.go).scrollIntoView({ behavior: "smooth", block: "start" })));
 
 /* barra fixa */
 const dock = $("#dock"); let past = false, inOffer = false, inEnd = false;
