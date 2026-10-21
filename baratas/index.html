@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Bye-Bye Baratas | Elimine todas as baratas da sua casa</title>
+<meta name="description" content="Bye-Bye Baratas: o Pozinho Rosa que elimina as baratas direto no ninho. Resultados em 24h. Frete 1 real.">
+<meta property="og:title" content="Bye-Bye Baratas: elimine todas as baratas da sua casa">
+<meta property="og:description" content="O Pozinho Rosa que elimina as baratas direto no ninho. Resultados em 24h. Frete 1 real.">
+<meta property="og:image" content="https://orafaelcrv.com.br/baratas/assets/og.jpg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://orafaelcrv.com.br/baratas">
+<meta name="theme-color" content="#90171c">
+<link rel="icon" type="image/png" href="/baratas/assets/favicon.png">
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;700&display=swap">
+<style>
+body{margin:0;background:#fff}
+x-dc{display:block}
+html{scroll-behavior:smooth}
+.bb{font-family:'Arimo',Arial,Helvetica,sans-serif;color:#54595f;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.bb *{box-sizing:border-box}
+:where(.bb) :where(h1,h2,h3,p,ul){margin:0;padding:0}
+.bb img{display:block;max-width:100%}
+.in{max-width:1024px;margin:0 auto;padding:0 20px}
+
+/* animações */
+@keyframes bbUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+@keyframes bbFade{from{opacity:0}to{opacity:1}}
+@keyframes bbZoom{from{transform:scale(1.07)}to{transform:scale(1)}}
+@keyframes bbPulse{0%{box-shadow:0 0 0 0 rgba(126,185,0,.55)}70%,100%{box-shadow:0 0 0 16px rgba(126,185,0,0)}}
+@keyframes bbRing{0%{box-shadow:0 4px 14px rgba(0,0,0,.3),0 0 0 0 rgba(37,211,102,.6)}75%,100%{box-shadow:0 4px 14px rgba(0,0,0,.3),0 0 0 18px rgba(37,211,102,0)}}
+@keyframes bbFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes bbPop{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:none}}
+.pulse{animation:bbPulse 2.4s ease-out infinite}
+@supports (animation-timeline: view()){
+  .rv{animation:bbUp linear both;animation-timeline:view();animation-range:entry 0% entry 40%}
+}
+
+/* botão */
+.btn{text-shadow:none;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:14px 30px;background:#7eb900;border-bottom:4px solid #acd04f;border-radius:10px;color:#fff;font-weight:700;font-size:14px;line-height:1.2;text-transform:uppercase;text-decoration:none;text-align:center;transition:filter .15s,transform .15s}
+.btn:hover{filter:brightness(1.07);transform:translateY(-1px);color:#fff}
+.btn:active{transform:translateY(1px)}
+.btn svg{flex-shrink:0}
+
+/* topo */
+.top{position:relative;z-index:20}
+.topw{background:#fff;height:64px;box-shadow:0 1px 0 rgba(0,0,0,.04)}
+.topw .in{position:relative;height:100%;display:flex;align-items:center;justify-content:flex-end}
+.logo{position:absolute;left:16px;top:10px;width:86px;z-index:3;transition:transform .2s}
+.logo:hover{transform:rotate(-3deg) scale(1.03)}
+.logo img{width:100%;height:auto}
+.burger{width:44px;height:44px;border:0;border-radius:6px;background:#eef1f6;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.dnav{display:none}
+.band{background:#90171c;border-top:3px solid #f4c43c;height:58px;display:flex;align-items:center;justify-content:center}
+.band img{width:118px;height:auto}
+.menu{position:absolute;left:0;right:0;top:125px;background:#fff;box-shadow:0 10px 24px rgba(0,0,0,.18);z-index:30;animation:bbFade .2s both}
+.menu .in{display:flex;flex-direction:column;padding-top:8px;padding-bottom:8px}
+.menu a{display:block;padding:15px 4px;border-bottom:1px solid #eee;color:#115eac;font-weight:700;font-size:15px;text-transform:uppercase;text-decoration:none}
+.menu a:last-child{border-bottom:0}
+@media (min-width:900px){
+  .top .in{max-width:1180px;padding:0 28px}
+  .topw{height:80px}
+  .logo{left:28px;top:16px;width:122px}
+  .burger{display:none}
+  .dnav{display:flex;align-items:center;gap:30px}
+  .dnav a{color:#115eac;font-weight:700;font-size:14px;letter-spacing:.3px;text-transform:uppercase;text-decoration:none;padding:8px 0;border-bottom:2px solid transparent;transition:border-color .2s,color .2s}
+  .dnav a:hover{color:#0b4688;border-bottom-color:#fac333}
+  .dnav a.btn{min-height:44px;padding:10px 22px;font-size:13px;color:#fff;border-bottom:4px solid #acd04f}
+  .dnav a.btn:hover{color:#fff;border-bottom-color:#acd04f}
+  .band{height:64px}
+  .band img{width:150px}
+  .menu{display:none}
+}
+
+/* hero: celular, texto em cima e foto embaixo */
+.hero{position:relative;background:linear-gradient(180deg,#2f4360 0%,#4e5f76 100%);overflow:hidden}
+.hero-t{position:relative;z-index:2;padding:30px 18px 0;text-align:center;color:#fff;display:flex;flex-direction:column;align-items:center;text-shadow:0 2px 14px rgba(0,0,0,.35)}
+.hero-t>*{animation:bbUp .8s cubic-bezier(.2,.7,.2,1) both}
+.hero-t>:nth-child(2){animation-delay:.1s}
+.hero-t>:nth-child(3){animation-delay:.2s}
+.hero-t>:nth-child(4){animation-delay:.3s}
+.hero-t>:nth-child(5){animation-delay:.45s}
+.pill{position:relative;display:flex;align-items:center;justify-content:center;width:100%;max-width:380px;height:34px;padding-left:52px;padding-right:10px;border-radius:17px;background:#f870a0;color:#fff;font-weight:700;font-size:17px;white-space:nowrap}
+.pill img{position:absolute;left:6px;top:-5px;width:52px;height:auto}
+.hero h1{margin-top:22px;font-weight:700;font-size:33px;line-height:1.18;text-transform:uppercase}
+.sub{margin-top:22px;font-weight:700;font-size:18px;line-height:1.35}
+.sub span{color:#f8c030}
+.sub+.sub{margin-top:12px}
+.hero-cta{margin-top:24px;width:100%;max-width:360px;min-height:56px;padding:12px 16px;font-size:13.5px}
+.hero-m{position:relative;width:140%;max-width:860px;left:50%;transform:translateX(-50%);margin-top:calc(min(140vw,860px)*-.3);-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 30%);mask-image:linear-gradient(180deg,transparent 0,#000 30%);overflow:hidden}
+.hero-m picture{display:block}
+.hero-m img{width:100%;height:auto;animation:bbZoom 2.6s ease-out both}
+
+/* hero: computador, foto panorâmica inteira na primeira tela e texto à esquerda */
+@media (min-width:900px){
+  .hero{background:#2a3550}
+  .hero-c{position:relative;height:min(calc(100vh - 147px),55.8vw);min-height:520px}
+  .hero-c::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(9,20,42,.78) 0%,rgba(9,20,42,.55) 32%,rgba(9,20,42,0) 58%);z-index:1;pointer-events:none}
+  .hero-m{position:absolute;inset:0;width:100%;max-width:none;left:0;transform:none;margin:0;-webkit-mask-image:none;mask-image:none}
+  .hero-m picture,.hero-m img{width:100%;height:100%}
+  .hero-m img{object-fit:cover;object-position:62% 55%}
+  .hero-t{position:absolute;top:50%;transform:translateY(-50%);left:max(28px,calc((100% - 1180px)/2 + 28px));width:min(44%,600px);padding:0;align-items:flex-start;text-align:left}
+  .hero-t>*{animation-name:bbUp}
+  .pill{width:auto;max-width:none;height:40px;border-radius:999px;padding:0 24px 0 78px;font-size:clamp(16px,1.4vw,21px);justify-content:flex-start}
+  .pill img{left:8px;top:-8px;width:62px}
+  .hero h1{margin-top:clamp(18px,2vw,28px);font-size:clamp(34px,3.7vw,60px);line-height:1.12}
+  .sub{margin-top:clamp(14px,1.5vw,22px);font-size:clamp(17px,1.45vw,23px);line-height:1.4}
+  .sub+.sub{margin-top:10px}
+  .hero-cta{margin-top:clamp(20px,2.2vw,32px);width:auto;max-width:none;min-height:58px;padding:16px 34px;font-size:clamp(14px,1.05vw,16px);white-space:nowrap}
+}
+
+/* como funciona */
+.how{background:#f7f7f7;padding:46px 0 60px;position:relative}
+.notch{position:absolute;left:50%;width:90px;height:22px;margin-left:-45px;pointer-events:none;z-index:2}
+.notch svg{display:block;width:90px;height:22px}
+.how-h{display:flex;flex-direction:column;align-items:center;text-align:center}
+.how-h img{width:86px;height:auto}
+.h2{font-weight:700;font-size:25px;line-height:1.3;text-transform:uppercase;color:#115eac;text-wrap:balance}
+.how-h .h2{margin-top:8px;max-width:520px}
+.pink{color:#f870a0}
+.how-p{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:4px 12px;margin:22px auto 0;max-width:600px;padding:12px 20px;border:2px solid #115eac;border-radius:16px;color:#115eac;font-weight:700;font-size:15px;line-height:1.3;text-transform:uppercase;text-align:center}
+.steps{display:grid;grid-template-columns:minmax(0,1fr);gap:28px;max-width:538px;margin:40px auto 0}
+.step{background:#fff;border-radius:12px;box-shadow:0 1px 8px rgba(0,0,0,.14);padding:28px 22px 30px;display:flex;flex-direction:column;align-items:center;transition:box-shadow .25s}
+.step:hover{box-shadow:0 10px 26px rgba(17,94,172,.18)}
+.badge{width:159px;min-height:54px;padding:8px;border-radius:4px;background:#fac333;color:#115eac;font-weight:700;font-size:15px;line-height:17px;text-align:center;display:flex;align-items:center;justify-content:center;flex-direction:column}
+.media{display:block;width:100%;aspect-ratio:1/1;margin-top:26px;border-radius:8px;object-fit:cover;background:#efe7da;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
+.st{display:flex;align-items:center;gap:14px;margin-top:24px}
+.st img{width:80px;height:80px}
+.st h3{color:#115eac;font-weight:700;font-size:24px;line-height:1.2;text-transform:uppercase}
+.sp{margin-top:18px;align-self:stretch;border-left:3px solid #fac333;padding:2px 0 2px 15px;font-weight:700;font-size:17px;line-height:1.55;color:#54595f}
+.sp b{color:#f870a0}
+.how-b{display:flex;justify-content:center;margin-top:40px}
+.how-b .btn{min-width:min(324px,100%)}
+@media (min-width:1100px){
+  .steps{grid-template-columns:repeat(3,minmax(0,1fr));max-width:1100px;gap:26px}
+  .how .in{max-width:1140px}
+  .sp{font-size:16px}
+}
+@media (min-width:700px){.h2{font-size:34px}.how-h .h2{max-width:none}}
+
+/* quem usou */
+.yel{background:#ffd372;position:relative}
+.proof{padding:58px 0 70px}
+.box{background:#fff;border-radius:16px;box-shadow:0 1px 6px rgba(0,0,0,.12);padding:34px 16px 40px}
+.ph-h{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 14px}
+.ph-h img{width:44px;height:auto}
+.lbl{background:#7eb900;color:#fff;padding:6px 12px 5px;line-height:1.1}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:30px}
+.grid img{width:100%;height:auto;border-radius:12px;transition:transform .25s,box-shadow .25s}
+.grid img:hover{transform:scale(1.03);box-shadow:0 10px 24px rgba(0,0,0,.25)}
+.proof .how-b{margin-top:36px}
+@media (min-width:700px){.box{padding:40px 24px 44px}.grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:15px}.ph-h img{width:56px}}
+
+/* ofertas */
+.offer{background:#fff;padding:52px 0 70px;position:relative}
+.off-h{text-align:center}
+.off-h img{width:115px;height:auto;margin:0 auto}
+.off-h .h2{color:#7eb900;margin-top:10px}
+.off-s{margin-top:12px;font-weight:700;font-size:17px;line-height:1.6;text-transform:uppercase}
+.off-s span{color:#115eac}
+.plans{display:grid;grid-template-columns:minmax(0,1fr);gap:40px;max-width:460px;margin:44px auto 0}
+.plan{display:flex;flex-direction:column;align-items:center}
+.ph{width:80%;background:#115eac;border-radius:14px 14px 0 0;padding:16px 10px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;color:#fff;font-weight:700;font-size:22px;text-transform:uppercase}
+.ph img{width:200px;height:auto}
+.card{width:100%;background:#fff;border-radius:14px;box-shadow:0 2px 10px rgba(0,0,0,.16);padding:28px 20px 34px;display:flex;flex-direction:column;align-items:center;text-align:center;transition:box-shadow .25s}
+.card:hover{box-shadow:0 12px 30px rgba(17,94,172,.2)}
+.tag{font-weight:700;font-size:14px;line-height:1.4;text-transform:uppercase}
+.redp{display:inline-block;max-width:100%;background:#90171c;color:#fff;border-radius:16px;padding:7px 14px;font-weight:700;font-size:11.5px;line-height:1.35;text-transform:uppercase;margin-bottom:16px}
+.prod1{width:128px;height:auto;margin-top:14px;animation:bbFloat 4.5s ease-in-out infinite}
+.prod2{width:330px;height:auto;margin-top:12px;animation:bbFloat 4.5s ease-in-out infinite .6s}
+.ind{width:100%;margin-top:22px}
+.ind-t{background:#f8f7f3;border-radius:12px 12px 0 0;color:#115eac;font-weight:700;font-size:16px;line-height:38px;text-transform:uppercase}
+.ind ul{list-style:none;margin:0 5%;border:1px solid #eaeaea;border-top:0;border-radius:0 0 12px 12px;padding:4px 14px 6px;text-align:left}
+.ind li{display:flex;gap:11px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #eee;font-weight:700;font-size:14px;line-height:1.3;text-transform:uppercase}
+.ind li:last-child{border-bottom:0}
+.ind li svg{flex-shrink:0;margin-top:1px}
+.p-x{margin-top:22px;font-weight:700;font-size:24px}
+.p-v{font-weight:700;font-size:60px;line-height:1.05;color:#115eac;letter-spacing:-6px;margin-right:6px}
+.p-o{margin-top:4px;font-weight:700;font-size:16px;letter-spacing:-.4px;text-transform:uppercase}
+.p-o span{color:#7eb900}
+.p-u{margin-top:4px;font-weight:700;font-size:14px}
+.card .btn{margin-top:22px;width:252px;max-width:100%}
+@media (min-width:760px){
+  .plans{grid-template-columns:repeat(2,minmax(0,1fr));max-width:944px;gap:20px;align-items:start}
+  .plan.p1{margin-top:48px}
+}
+
+/* dúvidas */
+.faq{padding:70px 0 70px}
+.faq .box{display:flex;flex-wrap:wrap;gap:26px 30px;align-items:center;padding:34px 18px 34px}
+.faq-t{flex:1 1 260px;font-weight:700;font-size:28px;line-height:1.25;text-transform:uppercase;color:#115eac}
+.faq-l{flex:999 1 480px;min-width:0;display:flex;flex-direction:column;gap:16px}
+details.q{background:#fff;border-radius:10px;box-shadow:0 2px 0 #e4e7ec,0 1px 6px rgba(0,0,0,.1);transition:box-shadow .2s}
+details.q:hover{box-shadow:0 2px 0 #e4e7ec,0 6px 16px rgba(17,94,172,.14)}
+details.q summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:14px;min-height:64px;padding:14px 18px 14px 22px;color:#115eac;font-weight:700;font-size:15px;line-height:1.35;text-transform:uppercase}
+details.q summary::-webkit-details-marker{display:none}
+details.q summary i{flex-shrink:0;width:0;height:0;border-left:7px solid #115eac;border-top:5px solid transparent;border-bottom:5px solid transparent;transition:transform .2s}
+details.q[open] summary i{transform:rotate(90deg)}
+details.q p{padding:0 22px 20px 43px;font-size:16px;line-height:1.6;color:#54595f}
+details.q[open] p{animation:bbUp .35s ease-out both}
+@media (min-width:700px){.faq .box{padding:44px 34px}.faq-t{font-size:32px;padding-left:4px}details.q summary{font-size:16px}}
+
+/* rodapé */
+.foot{background:#202020;color:#fff;padding:44px 0 40px}
+.fgrid{display:flex;flex-wrap:wrap;gap:34px 60px}
+.fl{flex:1 1 240px}
+.fl img{width:170px;height:auto}
+.fl p{margin-top:20px;font-size:11px;line-height:1.5;max-width:240px}
+.fr{flex:999 1 400px;min-width:0}
+.fr h3{font-weight:700;font-size:16px;margin-bottom:6px}
+.fr a.c{display:flex;align-items:center;gap:14px;min-height:56px;border-bottom:1px solid #3a3a3a;color:#fff;font-size:14px;text-decoration:none}
+.fr a.c:hover{text-decoration:underline}
+.soc{display:flex;gap:8px;margin-top:18px}
+.soc a{width:36px;height:36px;border-radius:4px;background:#3a3a3f;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.soc a:hover{background:#55555c}
+@media (min-width:900px){.fl img{width:192px}}
+
+/* whatsapp flutuante */
+.fab{position:fixed;right:18px;bottom:20px;width:60px;height:60px;z-index:50;border-radius:50%;background:#25d366;display:flex;align-items:center;justify-content:center;animation:bbPop .4s .8s both,bbRing 2.2s 1.4s ease-out infinite}
+.fab::after{content:"";position:absolute;right:1px;top:1px;width:14px;height:14px;border-radius:50%;background:#ff1f1f;border:2px solid #fff}
+.fab svg{width:32px;height:32px}
+.fab:hover{filter:brightness(1.05)}
+@media (min-width:900px){.fab{width:64px;height:64px;right:26px;bottom:26px}.fab svg{width:34px;height:34px}}
+
+@media (prefers-reduced-motion:reduce){.bb *,.bb *::before,.bb *::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</helmet>
+
+<div class="bb">
+
+<header class="top" id="topo">
+<div class="topw">
+<div class="in">
+<a class="logo" href="#topo" aria-label="Bye-Bye Baratas, voltar ao início"><img src="/baratas/assets/logo.png" alt="Bye-Bye Baratas"></a>
+<nav class="dnav" aria-label="Menu principal">
+<a href="#como-funciona">Como funciona</a>
+<a href="#depoimentos">Quem usou</a>
+<a href="#duvidas">Dúvidas</a>
+<a href="#contato">Contato</a>
+<a class="btn" href="#ofertas">Comprar agora</a>
+</nav>
+<button class="burger" aria-label="Abrir menu" aria-expanded="false" id="burg"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 6.5h17M3.5 12h17M3.5 17.5h17" stroke="#2f73d8" stroke-width="2.6" stroke-linecap="round"/></svg></button>
+</div>
+</div>
+<div class="band"><img src="/baratas/assets/frete-topo.png" alt="Frete 1 real"></div>
+<div id="mnu" hidden>
+<nav class="menu" aria-label="Menu">
+<div class="in">
+<a href="#como-funciona">Como funciona</a>
+<a href="#depoimentos">Quem usou</a>
+<a href="#ofertas">Comprar</a>
+<a href="#duvidas">Dúvidas frequentes</a>
+<a href="#contato">Fale conosco</a>
+</div>
+</nav>
+</div>
+</header>
+
+<section class="hero">
+<div class="hero-c">
+<div class="hero-t">
+<div class="pill"><img src="/baratas/assets/pozinho.png" alt="">BARATAS? NUNCA MAIS!</div>
+<h1>Elimine todas as<br>baratas da sua<br>casa.</h1>
+<p class="sub">Bye-Bye Baratas — O Pozinho Rosa<br>que elimina as baratas direto no ninho.</p>
+<p class="sub"><span>⚡Resultados em 24h –</span> Ação invisível.<br>Efeito total.</p>
+<a class="btn hero-cta pulse" href="#ofertas"><svg width="6" height="9" viewBox="0 0 6 9" aria-hidden="true"><path d="M0 0l6 4.5L0 9z" fill="#fff"/></svg>Quero eliminar as baratas agora</a>
+</div>
+<div class="hero-m"><picture><source media="(min-width: 900px)" srcset="/baratas/assets/hero-wide.jpg"><img src="/baratas/assets/hero.jpg" alt="Casa moderna protegida por uma cúpula e o pote Bye-Bye Baratas no jardim"></picture></div>
+</div>
+</section>
+
+<section class="how" id="como-funciona">
+<div class="notch" style="top:-1px" aria-hidden="true"><svg viewBox="0 0 90 22"><path d="M0 0 Q36 0 45 22 Q54 0 90 0 Z" fill="#242612"/></svg></div>
+<div class="in">
+<div class="how-h rv">
+<img src="/baratas/assets/pozinho.png" alt="">
+<h2 class="h2"><span class="pink">O Pozinho Rosa</span> vai onde nenhuma outra solução chega: <span class="pink">o ninho</span></h2>
+<div class="how-p"><span>Você aplica</span><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#fac333"/><path d="M7 12h9M12.5 8l4 4-4 4" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Elas fazem o resto</span></div>
+</div>
+
+<div class="steps">
+<article class="step rv">
+<div class="badge">PASSO<br>1</div>
+<video class="media" autoplay muted loop playsinline preload="auto" poster="/baratas/assets/passo1-poster.jpg" aria-label="Animação: o pozinho rosa sendo colocado nos cantinhos e as baratas indo atrás dele"><source src="/baratas/assets/passo1.webm" type="video/webm"><source src="/baratas/assets/passo1.mp4" type="video/mp4"></video>
+<div class="st"><img src="/baratas/assets/icon-atracao.png" alt=""><h3>Atração</h3></div>
+<p class="sp">O <b>Pozinho Rosa</b> tem um atrativo poderoso que chama a atenção das baratas naturalmente. Você só aplica. Elas encontram.</p>
+</article>
+<article class="step rv">
+<div class="badge">PASSO<br>2</div>
+<video class="media" autoplay muted loop playsinline preload="auto" poster="/baratas/assets/passo2-poster.jpg" aria-label="Animação: a barata come o pozinho rosa, fica cheia de pontinhos rosas e contamina as outras no ninho"><source src="/baratas/assets/passo2.webm" type="video/webm"><source src="/baratas/assets/passo2.mp4" type="video/mp4"></video>
+<div class="st"><img src="/baratas/assets/icon-contaminacao.png" alt=""><h3>Contaminação</h3></div>
+<p class="sp">Ao comer ou encostar, as baratas ficam completamente contaminadas e retornam ao ninho com o veneno.</p>
+</article>
+<article class="step rv">
+<div class="badge">PASSO<br>3</div>
+<video class="media" autoplay muted loop playsinline preload="auto" poster="/baratas/assets/passo3-poster.jpg" aria-label="Animação: as baratas do ninho, cobertas de pó rosa, caem e são eliminadas"><source src="/baratas/assets/passo3.webm" type="video/webm"><source src="/baratas/assets/passo3.mp4" type="video/mp4"></video>
+<div class="st"><img src="/baratas/assets/icon-erradicacao.png" alt=""><h3>Erradicação</h3></div>
+<p class="sp">No ninho, o veneno se espalha por contato ou canibalismo. A ação é contínua e a colônia é eliminada por completo.</p>
+</article>
+</div>
+
+<div class="how-b rv"><a class="btn pulse" href="#ofertas"><svg width="6" height="9" viewBox="0 0 6 9" aria-hidden="true"><path d="M0 0l6 4.5L0 9z" fill="#fff"/></svg>Quero a solução definitiva</a></div>
+</div>
+</section>
+
+<section class="yel proof" id="depoimentos">
+<div class="notch" style="top:-1px" aria-hidden="true"><svg viewBox="0 0 90 22"><path d="M0 0 Q36 0 45 22 Q54 0 90 0 Z" fill="#f7f7f7"/></svg></div>
+<div class="in">
+<div class="box rv">
+<div class="ph-h">
+<h2 class="h2">Quem usou,</h2>
+<img src="/baratas/assets/check.png" alt="">
+<h2 class="h2 lbl">Resolveu.</h2>
+</div>
+<div class="grid">
+<img src="/baratas/assets/print1.png" alt="Comentário de cliente no Instagram dizendo que o produto funcionou">
+<img src="/baratas/assets/print2.png" alt="Comentário de cliente no Instagram agradecendo o resultado">
+<img src="/baratas/assets/print3.png" alt="Comentários de clientes no Instagram perguntando pelo produto">
+<img src="/baratas/assets/print4.png" alt="Comentários de clientes no Instagram pedindo o link">
+<img src="/baratas/assets/print5.png" alt="Comentários de clientes no Instagram sobre o resultado">
+<img src="/baratas/assets/print6.png" alt="Comentário de cliente no Instagram com depoimento">
+<img src="/baratas/assets/print7.png" alt="Comentário de cliente no Instagram dizendo que acabou com as baratas">
+<img src="/baratas/assets/print8.png" alt="Comentários de clientes no Instagram perguntando onde comprar">
+</div>
+<div class="how-b"><a class="btn pulse" href="#ofertas"><svg width="6" height="9" viewBox="0 0 6 9" aria-hidden="true"><path d="M0 0l6 4.5L0 9z" fill="#fff"/></svg>Quero resolver isso hoje</a></div>
+</div>
+</div>
+</section>
+
+<section class="offer" id="ofertas">
+<div class="notch" style="top:-1px" aria-hidden="true"><svg viewBox="0 0 90 22"><path d="M0 0 Q36 0 45 22 Q54 0 90 0 Z" fill="#ffd372"/></svg></div>
+<div class="in">
+<div class="off-h rv">
+<img src="/baratas/assets/estrelas.png" alt="">
+<h2 class="h2">É hora de resolver de verdade</h2>
+<p class="off-s"><span>Compre agora</span> e veja resultado já nas primeiras 24h.👇</p>
+</div>
+
+<div class="plans">
+<div class="plan p1 rv">
+<div class="ph">1 unidade<img src="/baratas/assets/frete-topo.png" alt="Frete 1 real"></div>
+<div class="card">
+<p class="tag" style="color:#3aa6d6">🎯 Potente pra eliminar<br>com precisão.</p>
+<img class="prod1" src="/baratas/assets/pote.png" alt="Pote Bye-Bye Baratas">
+<div class="ind">
+<div class="ind-t">Indicado para:</div>
+<ul>
+<li><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#7eb900"/><path d="M6.5 12.5l3.6 3.6 7.4-7.6" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>Aplicações pontuais</li>
+<li><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#7eb900"/><path d="M6.5 12.5l3.6 3.6 7.4-7.6" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>Focos isolados</li>
+<li><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#7eb900"/><path d="M6.5 12.5l3.6 3.6 7.4-7.6" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>Kitnet ou apartamento compacto</li>
+</ul>
+</div>
+<p class="p-x">2x de</p>
+<p class="p-v">R$ 52,58</p>
+<p class="p-o">ou <span>R$99,90</span> à vista</p>
+<a class="btn" href="https://wa.me/5561995619733?text=Ol%C3%A1!%20Quero%20comprar%201%20unidade%20do%20Bye-Bye%20Baratas."><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 3h3.2l2.6 12h11l2.2-8.5H6.4" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.5" cy="20" r="2" fill="#fff"/><circle cx="18" cy="20" r="2" fill="#fff"/></svg>Comprar agora</a>
+</div>
+</div>
+
+<div class="plan p2 rv">
+<div class="ph">2 unidades<img src="/baratas/assets/frete-topo.png" alt="Frete 1 real"></div>
+<div class="card">
+<p class="redp">🔥 Mais proteção &nbsp;|&nbsp; 10% de desconto</p>
+<p class="tag" style="color:#e8781a">⚡Proteção máxima para toda a casa</p>
+<img class="prod2" src="/baratas/assets/potes-3.png" alt="Dois potes Bye-Bye Baratas e um terceiro de brinde: compre 2, leve 3">
+<div class="ind">
+<div class="ind-t">Indicado para:</div>
+<ul>
+<li><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#7eb900"/><path d="M6.5 12.5l3.6 3.6 7.4-7.6" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>Múltiplos focos</li>
+<li><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#7eb900"/><path d="M6.5 12.5l3.6 3.6 7.4-7.6" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>Infestações frequentes</li>
+<li><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#7eb900"/><path d="M6.5 12.5l3.6 3.6 7.4-7.6" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>Residências maiores: casas ou apartamentos</li>
+</ul>
+</div>
+<p class="p-x">3x de</p>
+<p class="p-v">R$ 64,17</p>
+<p class="p-o">ou <span>R$179,82</span> à vista</p>
+<p class="p-u">(R$ 89,91 por unidade)</p>
+<a class="btn pulse" href="https://wa.me/5561995619733?text=Ol%C3%A1!%20Quero%20a%20oferta%20compre%202%20leve%203%20do%20Bye-Bye%20Baratas."><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 3h3.2l2.6 12h11l2.2-8.5H6.4" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.5" cy="20" r="2" fill="#fff"/><circle cx="18" cy="20" r="2" fill="#fff"/></svg>Comprar agora</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="yel faq" id="duvidas">
+<div class="notch" style="top:-1px" aria-hidden="true"><svg viewBox="0 0 90 22"><path d="M0 0 Q36 0 45 22 Q54 0 90 0 Z" fill="#fff"/></svg></div>
+<div class="in">
+<div class="box rv">
+<h2 class="faq-t">Dúvidas<br>frequentes</h2>
+<div class="faq-l">
+<details class="q"><summary><i></i><span>Preciso aplicar todo dia ou só uma vez&nbsp;❓</span></summary><p>Não precisa aplicar todo dia. Coloque pequenas porções do Pozinho Rosa nos pontos por onde as baratas passam e deixe agir. Se o pozinho acabar ou ficar sujo, é só repor.</p></details>
+<details class="q"><summary><i></i><span>É seguro para quem tem pets ou crianças&nbsp;❓</span></summary><p>Aplique em locais de difícil acesso, como atrás de móveis, em frestas e embaixo de pias, sempre fora do alcance de crianças e animais de estimação. Siga as orientações da embalagem.</p></details>
+<details class="q"><summary><i></i><span>Em quanto tempo começa a fazer efeito&nbsp;❓</span></summary><p>Os primeiros resultados aparecem já nas primeiras 24 horas. Como as baratas levam o produto até o ninho, a ação continua nos dias seguintes.</p></details>
+<details class="q"><summary><i></i><span>Onde devo aplicar&nbsp;❓</span></summary><p>Nos lugares por onde as baratas passam e se escondem: cozinha, banheiro, atrás da geladeira e do fogão, embaixo de pias, perto de ralos, em frestas e rodapés.</p></details>
+<details class="q"><summary><i></i><span>Funciona com todos os tipos de barata&nbsp;❓</span></summary><p>O Pozinho Rosa age nas baratas mais comuns em casas e apartamentos. Se tiver dúvida sobre o seu caso, chame a gente no WhatsApp.</p></details>
+<details class="q"><summary><i></i><span>Funciona com formigas também&nbsp;❓</span></summary><p>O Bye-Bye Baratas foi desenvolvido para baratas. Para outras pragas, fale com a gente no WhatsApp que a gente te orienta.</p></details>
+</div>
+</div>
+</div>
+</section>
+
+<footer class="foot" id="contato">
+<div class="in">
+<div class="fgrid">
+<div class="fl">
+<img src="/baratas/assets/logo-rodape.png" alt="Bye-Bye Baratas">
+<p>2024 Bye-Bye Baratas. Todos os direitos reservados.</p>
+<p>GOTV AGÊNCIA DE PUBLICIDADE LTDA. CNPJ: 10.457.704/0001-41</p>
+</div>
+<div class="fr">
+<h3>Fale conosco</h3>
+<a class="c" href="https://wa.me/5561995619733"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.3 15.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zM8.6 7.4c-.2 0-.5.1-.7.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3 2.4 1 2.9.8 3.4.7.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.7-.4l-1.8-.9c-.3-.1-.5-.1-.7.1l-.9 1.1c-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.3-1.4-.8-.7-1.4-1.7-1.5-2-.2-.3 0-.4.1-.6l.5-.5.3-.5c.1-.2 0-.4 0-.5l-.8-2c-.2-.5-.4-.4-.6-.4z"/></svg>(61) 99561-9733</a>
+<a class="c" href="https://wa.me/5561999682068"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.3 15.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zM8.6 7.4c-.2 0-.5.1-.7.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3 2.4 1 2.9.8 3.4.7.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.7-.4l-1.8-.9c-.3-.1-.5-.1-.7.1l-.9 1.1c-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.3-1.4-.8-.7-1.4-1.7-1.5-2-.2-.3 0-.4.1-.6l.5-.5.3-.5c.1-.2 0-.4 0-.5l-.8-2c-.2-.5-.4-.4-.6-.4z"/></svg>(61) 99968-2068</a>
+<a class="c" href="mailto:byebyebaratas@gmail.com"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="#fff" stroke-width="1.8"/><path d="M3.5 7l8.5 6.5L20.5 7" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/></svg>byebyebaratas@gmail.com</a>
+<div class="soc">
+<a href="https://instagram.com/byebyebaratas" aria-label="Instagram do Bye-Bye Baratas"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="#fff" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17" cy="7" r="1.2" fill="#fff"/></svg></a>
+</div>
+</div>
+</div>
+</div>
+</footer>
+
+<a class="fab" href="https://wa.me/5561995619733" aria-label="Falar no WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 1.8a8.2 8.2 0 1 1-4.3 15.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 0 1 12 3.8zM8.6 7.4c-.2 0-.5.1-.7.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.1 4.9 4.3 2.4 1 2.9.8 3.4.7.5-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.7-.4l-1.8-.9c-.3-.1-.5-.1-.7.1l-.9 1.1c-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.3-1.4-.8-.7-1.4-1.7-1.5-2-.2-.3 0-.4.1-.6l.5-.5.3-.5c.1-.2 0-.4 0-.5l-.8-2c-.2-.5-.4-.4-.6-.4z"/></svg></a>
+
+</div>
+</x-dc>
+<script>
+(function(){var b=document.getElementById('burg'),m=document.getElementById('mnu'),f=document.querySelector('.fab');
+b.addEventListener('click',function(){m.hidden=!m.hidden;b.setAttribute('aria-expanded',String(!m.hidden))});
+m.addEventListener('click',function(e){if(e.target.closest('a')){m.hidden=true;b.setAttribute('aria-expanded','false')}});
+})();
+</script>
+</body>
+</html>
